@@ -1,21 +1,15 @@
-#![feature(proc_macro_hygiene, decl_macro)]
 
-#[macro_use] extern crate rocket;
-
-mod controller;
-use crate::controller::startup::*;
-
-fn main() {
-    startup().launch();
+#[get("/")]
+pub fn hello() -> &'static str {
+    "Hello, world!"
 }
 
 
 #[cfg(test)]
 mod test {
-    use super::rocket;
+    use crate::controller::startup::startup;
     use rocket::local::Client;
     use rocket::http::Status;
-    use crate::controller::startup::startup;
 
     #[test]
     fn hello_world() {
