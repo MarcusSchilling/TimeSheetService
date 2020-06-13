@@ -15,8 +15,9 @@ fn main() {
         .expect("Error loading posts");
 
     println!("Displaying {} timesheets", results.len());
-    for post in results {
-        println!("{}", post.id);
+    for timesheet in results {
+        println!("{}", timesheet.id);
+        println!("{}", timesheet.name);
         println!("----------\n");
     }
 }

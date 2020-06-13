@@ -11,3 +11,21 @@ pub struct Timesheet {
     pub grade: Option<f32>,
     pub ects: Option<f32>
 }
+use super::schema::timesheets;
+
+#[derive(Insertable)]
+#[table_name="timesheets"]
+pub struct NewTimesheet<'a> {
+    pub name: &'a str,
+    pub time_done: &'a PgInterval,
+    pub time_target: &'a PgInterval
+}
+
+#[derive(AsChangeset)]
+#[table_name="timesheets"]
+pub struct TimesheetForm<'a> {
+    pub start_date: Option<&'a PgTimestamp>,
+    pub end_date: Option<&'a PgTimestamp>,
+    pub grade: Option<& 'a f32>,
+    pub ects: Option<& 'a f32>,
+}
