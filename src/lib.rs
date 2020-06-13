@@ -55,3 +55,13 @@ pub fn update_or_set_grade<'a>(conn: &PgConnection, id: &'a i32, grade: &'a f32)
     println!("Updated timesheet {}", timesheet.name);
 
 }
+
+
+pub fn delete_timesheet_by_name(connection: &PgConnection, name_pattern: String) -> usize {
+    use schema::timesheets::dsl::*;
+    use self::*;
+
+    diesel::delete(timesheets.filter(name.like(name_pattern)))
+        .execute(connection)
+        .expect("Error deleting timesheets")
+}
